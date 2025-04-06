@@ -49,37 +49,6 @@
     <meta charset="utf-8">
     <title>PS5MACEDO Exploit 2025-3-29 ESP32S2 (etaHEN 2.0B/UMTX2)</title>
     <script type="module" src="https://ps4macedo.github.io/ps5lib/lib/esp-web-tools-customizado.js"></script>
-<script type="module">
-  const traduzirMensagens = () => {
-    const InstallButton = customElements.get('esp-web-install-button');
-    if (!InstallButton) return;
-
-    InstallButton.prototype.localize = function (key) {
-      const mensagens = {
-        "install": "🚀 Bora instalar!",
-        "connecting": "🔌 Conectando com carinho...",
-        "writing": "🛠️ Gravando o host no seu chip...",
-        "done": "✅ Tudo certo! Host gravado com sucesso.",
-        "error": "❌ Opaa! Algo deu errado durante a gravação.",
-        "not-supported": "⚠️ Este navegador não suporta Web Serial API. Tente abrir no Chrome!",
-        "not-allowed": "⚠️ O acesso à porta serial foi bloqueado. Verifique permissões.",
-        "manifest-error": "📦 Ih, deu ruim! Não consegui baixar o arquivo de instalação (.json).",
-        "device-not-supported": "❌ Esse chip não é compatível! Tem certeza que escolheu o modelo certo?"
-      };
-      return mensagens[key] || key;
-    };
-  };
-
-  // Espera o componente carregar no DOM
-  const observar = new MutationObserver(() => {
-    if (document.querySelector('esp-web-install-button')) {
-      traduzirMensagens();
-      observar.disconnect();
-    }
-  });
-
-  observar.observe(document.body, { childList: true, subtree: true });
-</script>
   </head>
   <body onload="setTimeout(poc,150)">
     <br><br><br>
@@ -98,8 +67,8 @@
       </center>
     </div>
     <br><br>
-    <select id="chipSelector" onchange="updateManifest()" style="font-size:20px;padding:10px;border-radius:5px;">
-      <option value="">Selecione sua ESP</option>
+    <select id="chipSelector" onchange="handleChipSelection()">
+      <option value="">Selecione seu chip</option>
       <option value="esp_8266.json">ESP8266</option>
       <option value="esp_32.json">ESP32</option>
       <option value="esp_32s2.json">ESP32S2</option>
@@ -113,12 +82,11 @@
     </div>
     <hr width="70%" size="1" color="#ff5757">
     <br><br>
-    <esp-web-install-button id="installButton" manifest="esp_32s2.json">
-      <button slot="activate" id="startButton" disabled>INICIAR</button>
-      <span slot="unsupported">Ah, seu navegador não funciona!</span>
-      <span slot="not-allowed">Ah, você não tem permissão para usar isso em HTTP!</span>
-    </esp-web-install-button>
-    <br><br><br>
+    <div id="buttonArea"></div>
+    <div id="chipMismatchWarning" style="color:red;font-size:18px;display:none;margin-top:10px;">
+      ❌ Falha ao carregar o pacote de gravação. Certifique-se de que selecionou o modelo correto da sua placa.
+    </div>
+    <br><br>
     <font style="color:#fff;font-size:19px;">
       Use SSID: <font color="#ee596f">PS5_ESP_HOST</font> e PASSWORD: <font color="#ee596f">12345678</font>.
     </font>
@@ -132,14 +100,15 @@
         @stooged (PS5-Server/32), @idlesauce (umtx2), @LM (etaHEN 2.0b), @EchoStretch, e todos que contribuíram com o kstuff.
       </font>
     </div>
+
     <script>
-      function updateManifest() {
+      async function handleChipSelection() {
         const selector = document.getElementById("chipSelector");
         const selected = selector.value;
         const chipLabel = document.getElementById("chipLabel");
-        const button = document.getElementById("installButton");
-        const startBtn = document.getElementById("startButton");
         const warning = document.getElementById("chipWarning");
+        const mismatchWarning = document.getElementById("chipMismatchWarning");
+        const buttonArea = document.getElementById("buttonArea");
 
         const manifestMap = {
           "esp_8266.json": "ESP8266",
@@ -148,17 +117,41 @@
           "esp_32s3.json": "ESP32S3"
         };
 
-        if (selected) {
-          chipLabel.innerText = manifestMap[selected];
-          button.setAttribute("manifest", selected);
-          startBtn.disabled = false;
+        chipLabel.innerText = manifestMap[selected] || "ESP32S2";
+        warning.innerHTML = "";
+        mismatchWarning.style.display = "none";
+        buttonArea.innerHTML = "";
+
+        if (!selected) return;
+
+        try {
+          const response = await fetch(selected, { method: 'HEAD' });
+          if (!response.ok) throw new Error();
+
+          const install = document.createElement("esp-web-install-button");
+          install.setAttribute("manifest", selected);
+
+          const btn = document.createElement("button");
+          btn.setAttribute("slot", "activate");
+          btn.innerText = "INICIAR";
+
+          const spanUnsupported = document.createElement("span");
+          spanUnsupported.setAttribute("slot", "unsupported");
+          spanUnsupported.innerText = "Seu navegador não suporta instalação via WebSerial. Use o Chrome!";
+
+          const spanNotAllowed = document.createElement("span");
+          spanNotAllowed.setAttribute("slot", "not-allowed");
+          spanNotAllowed.innerText = "Este site precisa ser acessado por HTTPS ou localhost para funcionar.";
+
+          install.appendChild(btn);
+          install.appendChild(spanUnsupported);
+          install.appendChild(spanNotAllowed);
+
+          buttonArea.appendChild(install);
           warning.innerHTML = "<b>⚠ Certifique-se de que este é o chip correto para evitar erros na gravação!</b>";
-        } else {
-          chipLabel.innerText = "ESP32S2";
-          startBtn.disabled = true;
-          warning.innerHTML = "";
+        } catch {
+          mismatchWarning.style.display = "block";
         }
       }
-    </script>
-  </body>
+    </scr  </body>
 </html>
