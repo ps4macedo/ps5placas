@@ -102,29 +102,34 @@
       </font>
     </div>
 <script>
-  // Se quiser que o botão já venha liberado sem precisar escolher o chip,
-  // descomente a linha abaixo:
-  // window.addEventListener('DOMContentLoaded', () => document.getElementById('startButton').disabled = false);
+  /*
+   *  ESTE SCRIPT NÃO TROCA MAIS O MANIFESTO.
+   *  Ele só:
+   *    • mostra o chip escolhido no texto
+   *    • habilita ou desabilita o botão
+   *  O <esp‑web‑install‑button> fica SEMPRE apontando para manifest.json,
+   *  que já contém os quatro firmwares e o ESP‑Web‑Tools escolhe o correto
+   *  de forma automática e segura.
+   */
 
   function updateManifest() {
     const selector   = document.getElementById("chipSelector");
-    const selected   = selector.value;
+    const selected   = selector.value;              // ex.: "esp_32.json"
     const chipLabel  = document.getElementById("chipLabel");
     const startBtn   = document.getElementById("startButton");
     const warning    = document.getElementById("chipWarning");
 
-    // Mapa só para mostrar o nome do chip na tela
-    const manifestMap = {
+    // Apenas para exibir o nome do chip na tela
+    const map = {
       "esp_8266.json": "ESP8266",
       "esp_32.json"  : "ESP32",
-      "esp_32s2.json": "ESP32S2",
-      "esp_32s3.json": "ESP32S3"
+      "esp_32s2.json": "ESP32‑S2",
+      "esp_32s3.json": "ESP32‑S3"
     };
 
     if (selected) {
-      chipLabel.innerText = manifestMap[selected];
-      // >>> Linha removida: não trocamos mais o manifesto <<<
-      // button.setAttribute("manifest", selected);
+      chipLabel.innerText = map[selected];
+      // >>> NÃO muda mais o manifesto! <<<
       startBtn.disabled = false;
       warning.innerHTML = "<b>⚠ Certifique‑se de que este é o chip correto para evitar erros na gravação!</b>";
     } else {
