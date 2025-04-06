@@ -82,11 +82,14 @@
     </div>
     <hr width="70%" size="1" color="#ff5757">
     <br><br>
-    <esp-web-install-button id="installButton" manifest="manifest.json">
-      <button slot="activate" id="startButton" disabled>INICIAR</button>
-      <span slot="unsupported">Ah, seu navegador não funciona!</span>
-      <span slot="not-allowed">Ah, você não tem permissão para usar isso em HTTP!</span>
-    </esp-web-install-button>
+
+	<!-- NÃO há mais <select> -->
+	<esp-web-install-button manifest="manifest.json">
+	  <button slot="activate">INICIAR</button>
+	  <span slot="unsupported">Seu navegador não é compatível 😔</span>
+	  <span slot="not-allowed">Use HTTPS para continuar</span>
+	</esp-web-install-button>
+	
     <br><br><br>
     <font style="color:#fff;font-size:19px;">
       Use SSID: <font color="#ee596f">PS5_ESP_HOST</font> e PASSWORD: <font color="#ee596f">12345678</font>.
@@ -102,42 +105,7 @@
       </font>
     </div>
 <script>
-  /*
-   *  ESTE SCRIPT NÃO TROCA MAIS O MANIFESTO.
-   *  Ele só:
-   *    • mostra o chip escolhido no texto
-   *    • habilita ou desabilita o botão
-   *  O <esp‑web‑install‑button> fica SEMPRE apontando para manifest.json,
-   *  que já contém os quatro firmwares e o ESP‑Web‑Tools escolhe o correto
-   *  de forma automática e segura.
-   */
 
-  function updateManifest() {
-    const selector   = document.getElementById("chipSelector");
-    const selected   = selector.value;              // ex.: "esp_32.json"
-    const chipLabel  = document.getElementById("chipLabel");
-    const startBtn   = document.getElementById("startButton");
-    const warning    = document.getElementById("chipWarning");
-
-    // Apenas para exibir o nome do chip na tela
-    const map = {
-      "esp_8266.json": "ESP8266",
-      "esp_32.json"  : "ESP32",
-      "esp_32s2.json": "ESP32‑S2",
-      "esp_32s3.json": "ESP32‑S3"
-    };
-
-    if (selected) {
-      chipLabel.innerText = map[selected];
-      // >>> NÃO muda mais o manifesto! <<<
-      startBtn.disabled = false;
-      warning.innerHTML = "<b>⚠ Certifique‑se de que este é o chip correto para evitar erros na gravação!</b>";
-    } else {
-      chipLabel.innerText = "-";
-      startBtn.disabled = true;
-      warning.innerHTML = "";
-    }
-  }
 </script>
   </body>
 </html>
