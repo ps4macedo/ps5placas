@@ -1,0 +1,16 @@
+{
+  "name": "PS5 Exploit 2025-3-29 (etaHEN 2.0B/UMTX2)",
+  "version": "ESP_ESP32-S3",
+  "supportedFw": "PS5 FW 1.XX - 5.XX",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        {
+          "path": "0x1iii1ii_ESP32S3_etaHEN2.0B.UMTX2.PS5.2025-3-29.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
