@@ -735,7 +735,7 @@ import{e,_ as t,o as i,r,x as o,i as a,n as s,t as n,m as l,a as d,E as c,b as h
         <ew-text-button
           @click=${()=>{const e=this.shadowRoot.querySelector("ew-checkbox");this._startInstall(e.checked)}}
         >
-          Next
+          Próximo
         </ew-text-button>
       </div>
     `]}_renderInstall(){let e,t;const i=!this._installErase&&this._isSameFirmware;if(!this._installConfirmed&&this._isSameVersion)e="Erase User Data",t=o`
@@ -765,7 +765,7 @@ import{e,_ as t,o as i,r,x as o,i as a,n as s,t as n,m as l,a as d,E as c,b as h
           <ew-text-button
             @click=${()=>{this._state=i&&this._installErase?"PROVISION":"DASHBOARD"}}
           >
-            Next
+            Próximo
           </ew-text-button>
         </div>
       `}else"error"===this._installState.state&&(e="Falha na instalação",t=o`
