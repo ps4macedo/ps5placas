@@ -748,7 +748,7 @@ import{e,_ as t,o as i,r,x as o,i as a,n as s,t as n,m as l,a as d,E as c,b as h
             Erase User Data
           </ew-text-button>
         </div>
-      `;else if(this._installConfirmed)if(this._installState&&"initializing"!==this._installState.state&&"preparing"!==this._installState.state)if("erasing"===this._installState.state)e="Instalando",t=this._renderProgress("Apagando");else if("writing"===this._installState.state||"finished"===this._installState.state&&void 0===this._client){let i,r;e="Instalando","finished"===this._installState.state?r="Concluindo":this._installState.details.percentage<4?r="Installing":i=this._installState.details.percentage,t=this._renderProgress(o`
+      `;else if(this._installConfirmed)if(this._installState&&"initializing"!==this._installState.state&&"preparing"!==this._installState.state)if("erasing"===this._installState.state)e="Instalando",t=this._renderProgress("Apagando");else if("writing"===this._installState.state||"finished"===this._installState.state&&void 0===this._client){let i,r;e="Instalando","finished"===this._installState.state?r="Concluindo":this._installState.details.percentage<4?r="Instalando":i=this._installState.details.percentage,t=this._renderProgress(o`
           ${r?o`${r}<br />`:""}
           <br />
           Isso levará
