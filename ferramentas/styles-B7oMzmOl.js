@@ -86,17 +86,17 @@ function t(t,e,i,o){var s,r=arguments.length,n=r<3?e:null===o?o=Object.getOwnPro
 `;class fe extends ue{}fe.styles=[me],customElements.define("ew-dialog",fe);const ge=n`
   :host {
     --roboto-font: Roboto, system-ui;
-    --text-color: rgba(0, 0, 0, 0.6);
+    --text-color: #ffffff;
     --danger-color: #db4437;
 
     --md-sys-color-primary: #03a9f4;
-    --md-sys-color-on-primary: #fff;
+    --md-sys-color-on-primary: #000000;
     --md-ref-typeface-brand: var(--roboto-font);
     --md-ref-typeface-plain: var(--roboto-font);
 
-    --md-sys-color-surface: #45454f;
-    --md-sys-color-surface-container: #45454f;
-    --md-sys-color-surface-container-high: #45454f;
+    --md-sys-color-surface: #000064;
+    --md-sys-color-surface-container: #000064;
+    --md-sys-color-surface-container-high: #000064;
     --md-sys-color-surface-container-highest: #f5f5f5;
     --md-sys-color-secondary-container: #e0e0e0;
 
