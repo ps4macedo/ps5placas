@@ -86,7 +86,7 @@ function t(t,e,i,o){var s,r=arguments.length,n=r<3?e:null===o?o=Object.getOwnPro
 `;class fe extends ue{}fe.styles=[me],customElements.define("ew-dialog",fe);const ge=n`
   :host {
     --roboto-font: Roboto, system-ui;
-    --text-color: #ffffff;
+    --text-color: #fff;
     --danger-color: #db4437;
 
     --md-sys-color-primary: #03a9f4;
