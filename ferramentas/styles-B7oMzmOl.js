@@ -102,6 +102,7 @@ function t(t,e,i,o){var s,r=arguments.length,n=r<3?e:null===o?o=Object.getOwnPro
 
     --md-sys-typescale-headline-font: var(--roboto-font);
     --md-sys-typescale-title-font: var(--roboto-font);
+	--md-dialog-headline-color: #ee596f;
   }
 
   a {
