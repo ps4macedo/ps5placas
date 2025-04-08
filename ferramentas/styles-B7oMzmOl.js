@@ -94,9 +94,9 @@ function t(t,e,i,o){var s,r=arguments.length,n=r<3?e:null===o?o=Object.getOwnPro
     --md-ref-typeface-brand: var(--roboto-font);
     --md-ref-typeface-plain: var(--roboto-font);
 
-    --md-sys-color-surface: #fff;
-    --md-sys-color-surface-container: #fff;
-    --md-sys-color-surface-container-high: #fff;
+    --md-sys-color-surface: #45454f;
+    --md-sys-color-surface-container: #45454f;
+    --md-sys-color-surface-container-high: #45454f;
     --md-sys-color-surface-container-highest: #f5f5f5;
     --md-sys-color-secondary-container: #e0e0e0;
 
