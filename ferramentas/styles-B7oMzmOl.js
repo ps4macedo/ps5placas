@@ -90,7 +90,7 @@ function t(t,e,i,o){var s,r=arguments.length,n=r<3?e:null===o?o=Object.getOwnPro
     --danger-color: #db4437;
 
     --md-sys-color-primary: #03a9f4;
-    --md-sys-color-on-primary: #000000;
+    --md-sys-color-on-primary: #ffff;
     --md-ref-typeface-brand: var(--roboto-font);
     --md-ref-typeface-plain: var(--roboto-font);
 
